@@ -1,8 +1,9 @@
-﻿#ifndef QQTINPUT_H
+#ifndef QQTINPUT_H
 #define QQTINPUT_H
 
 /**
- * 原作者 刘典武 mod引用
+ * 原作者 刘典武
+ * 田端瑞 mod引用
  * 2015年12月20日19:44:04 T.D.R (QQ:2657635903) mod LGPLv2.1
 **/
 
@@ -14,17 +15,17 @@
 #include <QTextEdit>
 #include <QPlainTextEdit>
 #include <QTextBrowser>
-#include <qqtspinbox.h>
-#include <qqtdoublespinbox.h>
-#include <qqtdateedit.h>
-#include <qqttimeedit.h>
-#include <qqtdatetimeedit.h>
-#include <QtSql>
+#include <QSql>
 #include <QPushButton>
 #include <QTimer>
 #include <QTextCodec>
 #include <qqtinput_global.h>
 #include <qqtsql.h>
+#include <qqtspinbox.h>
+#include <qqtdoublespinbox.h>
+#include <qqtdateedit.h>
+#include <qqttimeedit.h>
+#include <qqtdatetimeedit.h>
 
 namespace Ui {
 class QQtInput;
