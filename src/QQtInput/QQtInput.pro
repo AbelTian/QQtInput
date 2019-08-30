@@ -41,6 +41,10 @@ FORMS += \
         qqtinput.ui
 
 system("touch qqtinput.cpp")
+#必须首先设置
 add_version(3,0,0,0)
-add_sdk()
+#这里有顺序要求，先链接
 add_dependent_manager(QQt)
+#后发布！不可以打乱顺序。
+add_sdk()
+
