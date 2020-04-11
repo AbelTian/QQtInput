@@ -179,6 +179,7 @@ void QQtInput::InitForm()
     ui->checkShift->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_shift.png" );
     ui->checkShift->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_shift.png" );
     ui->checkShift->setFixedSize ( btnWidth, btnHeight );
+    //ui->widget->setFixedSize ( btnWidth, btnHeight );
 
     connect ( ui->radioNum, SIGNAL ( clicked() ), this, SLOT ( btn_clicked() ) );
     connect ( ui->checkShift, SIGNAL ( clicked() ), this, SLOT ( btn_clicked() ) );
