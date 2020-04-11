@@ -20,7 +20,7 @@ int main ( int argc, char* argv[] )
 #endif
 
     //不挑平台，强制显示。
-    QQtInput::Instance()->Init ( "min", "control", "QQt", 14, 14 );
+    QQtInput::Instance()->Init ( "min", "center", "QQt", 14, 14 );
 
     Dialog w;
     w.show();

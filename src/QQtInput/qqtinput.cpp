@@ -1,8 +1,9 @@
-﻿#include "qqtinput.h"
+#include "qqtinput.h"
 #include "ui_qqtinput.h"
 #include "qdesktopwidget.h"
 #include "qqtcore.h"
 #include "qqtsql.h"
+#include "qqtframe.h"
 
 QQtInput* QQtInput::_instance = 0;
 QQtInput::QQtInput ( QWidget* parent ) :
@@ -104,7 +105,7 @@ void QQtInput::InitForm()
     }
 
     m_db = newDatabaseConnection();
-    setDatabaseName ( m_db, DB_PINYIN );
+    setDatabaseName ( m_db, conf_db ( DB_PINYIN )  );
 
     isFirst = true;
     isPress = false;
@@ -120,50 +121,63 @@ void QQtInput::InitForm()
     currentBrowser = 0;
     currentEditType = "";
 
-    ui->btnDel->iconTable() [BTN_NORMAL] = "./skin/input/key_del.png";
-    ui->btnDel->iconTable() [BTN_PRESS] = "./skin/input/key_del_press.png";
-    ui->btnDel->iconTable() [BTN_UNCHECK] = "./skin/input/key_del.png";
-    ui->btnDel->iconTable() [BTN_CHECK] = "./skin/input/key_del_press.png";
-    ui->btnDel->iconTable() [BTN_HOVER] = "./skin/input/key_del.png";
-    ui->btnDel->iconTable() [BTN_DISABLE] = "./skin/input/key_del.png";
+    ui->btnDel->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDel->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_del_press.png" );
+    ui->btnDel->imageTable() [BTN_UNCHECK] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDel->imageTable() [BTN_CHECK] = QImage ( "./skin/input/key_del_press.png" );
+    ui->btnDel->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDel->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_del.png" );
 
-    ui->btnDelete->iconTable() [BTN_NORMAL] = "./skin/input/key_del.png";
-    ui->btnDelete->iconTable() [BTN_PRESS] = "./skin/input/key_del_press.png";
-    ui->btnDelete->iconTable() [BTN_UNCHECK] = "./skin/input/key_del.png";
-    ui->btnDelete->iconTable() [BTN_CHECK] = "./skin/input/key_del_press.png";
-    ui->btnDelete->iconTable() [BTN_HOVER] = "./skin/input/key_del.png";
-    ui->btnDelete->iconTable() [BTN_DISABLE] = "./skin/input/key_del.png";
+    ui->btnDelete->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDelete->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_del_press.png" );
+    ui->btnDelete->imageTable() [BTN_UNCHECK] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDelete->imageTable() [BTN_CHECK] = QImage ( "./skin/input/key_del_press.png" );
+    ui->btnDelete->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_del.png" );
+    ui->btnDelete->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_del.png" );
 
-    ui->btnClose->iconTable() [BTN_NORMAL] = "./skin/input/key_close.png";
-    ui->btnClose->iconTable() [BTN_PRESS] = "./skin/input/key_close_press.png";
-    ui->btnClose->iconTable() [BTN_UNCHECK] = "./skin/input/key_close.png";
-    ui->btnClose->iconTable() [BTN_CHECK] = "./skin/input/key_close_press.png";
-    ui->btnClose->iconTable() [BTN_HOVER] = "./skin/input/key_close.png";
-    ui->btnClose->iconTable() [BTN_DISABLE] = "./skin/input/key_close.png";
+    ui->btnClose->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_close.png" );
+    ui->btnClose->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_close_press.png" );
+    ui->btnClose->imageTable() [BTN_UNCHECK] = QImage ( "./skin/input/key_close.png" );
+    ui->btnClose->imageTable() [BTN_CHECK] = QImage ( "./skin/input/key_close_press.png" );
+    ui->btnClose->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_close.png" );
+    ui->btnClose->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_close.png" );
 
-    ui->btnSpace->iconTable() [BTN_NORMAL] = "./skin/input/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_PRESS] = "./skin/input/key_blank_press.png";
-    ui->btnSpace->iconTable() [BTN_UNCHECK] = "./skin/input/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_CHECK] = "./skin/input/key_blank_press.png";
-    ui->btnSpace->iconTable() [BTN_HOVER] = "./skin/input/key_blank.png";
-    ui->btnSpace->iconTable() [BTN_DISABLE] = "./skin/input/key_blank.png";
+    ui->btnSpace->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_blank.png" );
+    ui->btnSpace->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_blank_press.png" );
+    ui->btnSpace->imageTable() [BTN_UNCHECK] = QImage ( "./skin/input/key_blank.png" );
+    ui->btnSpace->imageTable() [BTN_CHECK] = QImage ( "./skin/input/key_blank_press.png" );
+    ui->btnSpace->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_blank.png" );
+    ui->btnSpace->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_blank.png" );
 
-    ui->btnReturn->iconTable() [BTN_NORMAL] = "./skin/input/key_return.png";
-    ui->btnReturn->iconTable() [BTN_PRESS] = "./skin/input/key_return_press.png";
-    ui->btnReturn->iconTable() [BTN_UNCHECK] = "./skin/input/key_return.png";
-    ui->btnReturn->iconTable() [BTN_CHECK] = "./skin/input/key_return_press.png";
-    ui->btnReturn->iconTable() [BTN_HOVER] = "./skin/input/key_return.png";
-    ui->btnReturn->iconTable() [BTN_DISABLE] = "./skin/input/key_return.png";
+    ui->btnReturn->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_return.png" );
+    ui->btnReturn->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_return_press.png" );
+    ui->btnReturn->imageTable() [BTN_UNCHECK] = QImage ( "./skin/input/key_return.png" );
+    ui->btnReturn->imageTable() [BTN_CHECK] = QImage ( "./skin/input/key_return_press.png" );
+    ui->btnReturn->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_return.png" );
+    ui->btnReturn->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_return.png" );
 
-    ui->radioCN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
+    ui->radioCN->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key.png" );
+    ui->radioCN->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_press.png" );
+    ui->radioCN->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key.png" );
+    ui->radioCN->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key.png" );
     ui->radioCN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioCN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
+
+    ui->radioEN->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key.png" );
+    ui->radioEN->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_press.png" );
+    ui->radioEN->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key.png" );
+    ui->radioEN->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key.png" );
     ui->radioEN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioEN->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
-    ui->radioEN->setFixedSize ( btnWidth, btnHeight );
-    ui->radioNum->setPixmap ( "./skin/input/key.png", "./skin/input/key_press.png" );
+
+    ui->radioNum->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key.png" );
+    ui->radioNum->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_press.png" );
+    ui->radioNum->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key.png" );
+    ui->radioNum->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key.png" );
     ui->radioNum->setFixedSize ( btnWidth, btnHeight );
-    ui->checkShift->setPixmap ( "./skin/input/key_shift.png", "./skin/input/key_shift_press.png" );
+
+    ui->checkShift->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_shift.png" );
+    ui->checkShift->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_shift_press.png" );
+    ui->checkShift->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_shift.png" );
+    ui->checkShift->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_shift.png" );
     ui->checkShift->setFixedSize ( btnWidth, btnHeight );
 
     connect ( ui->radioNum, SIGNAL ( clicked() ), this, SLOT ( btn_clicked() ) );
@@ -370,7 +384,11 @@ void QQtInput::btn_clicked()
         if ( currentType == "min" || currentType == "max" )
         {
             currentType = "chinese";
-            ui->checkShift->setPixmap ( "./skin/input/key_hidden.png", "./skin/input/key_hidden.png" );
+
+            ui->checkShift->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_hidden.png" );
+            ui->checkShift->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_hidden.png" );
+            ui->checkShift->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_hidden.png" );
+            ui->checkShift->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_hidden.png" );
 
             if ( ui->checkShift->isChecked() )
                 ui->checkShift->setChecked ( false );
@@ -395,7 +413,10 @@ void QQtInput::btn_clicked()
         else if ( currentType == "chinese" )
         {
             currentType = "min";
-            ui->checkShift->setPixmap ( "./skin/input/key_shift.png", "./skin/input/key_shift_press.png" );
+            ui->checkShift->imageTable() [BTN_NORMAL] = QImage ( "./skin/input/key_shift.png" );
+            ui->checkShift->imageTable() [BTN_PRESS] = QImage ( "./skin/input/key_shift_press.png" );
+            ui->checkShift->imageTable() [BTN_HOVER] = QImage ( "./skin/input/key_shift.png" );
+            ui->checkShift->imageTable() [BTN_DISABLE] = QImage ( "./skin/input/key_shift.png" );
 
             if ( ui->checkShift->isChecked() )
                 ui->checkShift->setChecked ( false );
